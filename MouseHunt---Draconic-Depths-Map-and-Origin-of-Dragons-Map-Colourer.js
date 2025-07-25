@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         MouseHunt - Draconic Depths Map Colourer
+// @name         MouseHunt - Draconic Depths Map & Origin of Dragons Colourer
 // @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer
 // @namespace    https://greasyfork.org/en/users/967077-maidenless
 // @version      1.0.3
@@ -10,6 +10,8 @@
 // @match		https://www.mousehuntgame.com/*
 // @match       http://www.mousehuntgame.com/camp.php*
 // @match       https://www.mousehuntgame.com/camp.php
+// @match		http://apps.facebook.com/mousehunt/*
+// @match		https://apps.facebook.com/mousehunt/*
 // @include      https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
 // @downloadURL https://update.greasyfork.org/scripts/509039/MouseHunt%20-%20Draconic%20Depths%20Map%20Colourer.user.js
 // @updateURL https://update.greasyfork.org/scripts/509039/MouseHunt%20-%20Draconic%20Depths%20Map%20Colourer.meta.js
@@ -32,6 +34,7 @@ const ARwarningText = "AR for Draconic Depths mice might be inaccurate.";
 // If the chest name contains any of the following as a substring, enable the colour coder.
 const chestKeywords = [
     "Draconic Depths",
+    "Origin of Dragons",
 ];
 
 // name, AR - per UNIX 1670418873
@@ -98,6 +101,37 @@ const Ele100 = [
 const Ele750 = [
     ["Mythical Dragon Emperor","39.72%"]
 ];
+const MopiLow = [
+    ["Violet Stormchild","43.17%"],
+    ["Thunder Strike","61.37%"]
+];
+const MopiMed = [
+    ["⚡Thunderlord⚡","57.11%"]
+];
+const MopiHigh = [
+    ["Dragoon","5%"],
+    ["Thundering Watcher","61.98%"]
+];
+const MopiMax = [
+    ["Ful'Mina the Mountain Queen","98.87%"]
+];
+const SizzleMild = [
+    ["Sizzle Pup","47.35%"],
+    ["Mild Spicekin","52.65%"]
+];
+const BETrio = [
+    ["Bearded Elder","49.91%"],
+    ["Smoldersnap","35.57%"],
+    ["Ignatia","36.46%%"]
+];
+const CinderBrut = [
+    ["Cinderstorm","68.92%"],
+    ["Bruticus the Blazing","25.72%"]
+];
+const KSS = [
+    ["Kalor'ignis of the Geyser","100%"],
+    ["Stormsurge the Vile Tempest","73.84%"]
+];
 
 
 // group location, mice, minimum luck, bait, bait ID, color
@@ -119,6 +153,14 @@ const miceGroups = [
     ["Elemental", EleZero, 173, "Std", 0, "#eb8be2"],
     ["Elemental", Ele100, 179, "EEC", 0, "#e565d8"],
     ["Elemental", Ele750, 273, "EEC", 0, "#de3ece"],
+    ["MoPi", MopiLow, 32, "DVC", 0, "#8f659a"],
+    ["MoPi", MopiMed, 60, "DVC", 0, "#a05ba4"],
+    ["MoPi", MopiHigh, 111, "DVC", 0, "#9c3dc2"],
+    ["MoPi", MopiMax, 142, "DVC", 0, "#8800ff"],
+    ["Eruption", SizzleMild, 32, "Mild", 0, "#c9b736"],
+    ["Eruption", BETrio, 60, "Medium", 0, "#e3a81c"],
+    ["Eruption", CinderBrut, 111, "Hot", 0, "#ffb800"],
+    ["Eruption", KSS, 142, "Flammin", 0, "#fc9d03"],
 
 ];
 
@@ -311,6 +353,10 @@ function colorize() {
     masterDivHeader.className = "tsitu-map-div";
     masterDivHeader.style =
         "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
+    const masterDivHeader2 = document.createElement("div");
+    masterDivHeader2.className = "tsitu-map-div";
+    masterDivHeader2.style =
+        "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
     const masterDivRow1 = document.createElement("div");
     masterDivRow1.className = "tsitu-map-div";
     masterDivRow1.style =
@@ -319,13 +365,25 @@ function colorize() {
     masterDivRow2.className = "tsitu-map-div";
     masterDivRow2.style =
         "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
+    const masterDivRow3 = document.createElement("div");
+    masterDivRow3.className = "tsitu-map-div";
+    masterDivRow3.style =
+        "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden"
+
+    const masterDivRow4 = document.createElement("div");
+    masterDivRow4.className = "tsitu-map-div";
+    masterDivRow4.style =
+        "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
+
     const spanStyle =
           "; width: auto; padding: 5px; width: 45px; color: black; font-weight: bold; font-size: 12.75px; text-shadow: 0px 0px 11px white";
 
     const spans1 = [];
     const spans2 = [];
+    const spans3 = [];
+    const spans4 = [];
 
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < allMiceGroups.length; i++) {
         const newSpan = document.createElement("span");
         newSpan.classList.add(allMiceGroups[i].id + "Span");
         if (allMiceGroups[i].count > -1) {
@@ -344,8 +402,12 @@ function colorize() {
 
        if (i < 8) {
             spans1.push(newSpan);
-       } else {
+       } else if (i < 16) {
             spans2.push(newSpan);
+       } else if (i < 24) {
+            spans3.push(newSpan);
+       } else {
+            spans4.push(newSpan);
        }
     }
 
@@ -475,6 +537,98 @@ function colorize() {
     for (let i = 4; i < 8; i++) {
         masterDivRow2.appendChild(spans2[i]);
     }
+    for (let i = 0; i < 1; i++) {
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header1Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+            newSpan.innerHTML = "Type";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header2Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Low";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header3Span");
+            newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Medium";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header4Span");
+            newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "High";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header6Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Max";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header1Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+            newSpan.innerHTML = "Type";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header2Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "SizzleMild";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header3Span");
+            newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "BETrio";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header4Span");
+            newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "CinderBrut";
+            masterDivHeader2.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header6Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "KSS";
+            masterDivHeader2.appendChild(newSpan);
+        }
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("FireSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "MoPi";
+        masterDivRow3.appendChild(newSpan);
+    }
+    for (let i = 0; i < 4; i++) {
+        masterDivRow3.appendChild(spans3[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("PoisonSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "Eruption";
+        masterDivRow3.appendChild(newSpan);
+    }
+    for (let i = 4; i < 8; i++) {
+        masterDivRow3.appendChild(spans3[i]);
+    }
 
     // Inject into DOM
     const insertEl = document.querySelector(
@@ -488,6 +642,8 @@ function colorize() {
     ) {
         insertEl.insertAdjacentElement("afterbegin", highlightDiv);
         insertEl.insertAdjacentElement("afterbegin", ARDiv);
+        insertEl.insertAdjacentElement("afterbegin", masterDivRow3);
+        insertEl.insertAdjacentElement("afterbegin", masterDivHeader2);
         insertEl.insertAdjacentElement("afterbegin", masterDivRow2);
         insertEl.insertAdjacentElement("afterbegin", masterDivRow1);
         insertEl.insertAdjacentElement("afterbegin", masterDivHeader);
