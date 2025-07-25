@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         MouseHunt - Draconic Depths Map & Origin of Dragons Colourer
-// @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer
+// @name         MouseHunt - Origin of Dragons Map Colourer
+// @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer & Udhe & Alvite
 // @namespace    https://greasyfork.org/en/users/967077-maidenless
 // @version      1.0.3
-// @description  Color codes mice on Draconic Depths maps according to type. Max ML shown per group and AR shown individually.
+// @description  Color codes mice on Origin of Dragons maps according to type. Max ML shown per group and AR shown individually.
 // @match	    http://mousehuntgame.com/*
 // @match		https://mousehuntgame.com/*
 // @match		http://www.mousehuntgame.com/*
@@ -22,6 +22,8 @@
 // Warden Slayer - Implemented bait changes.
 // Kuhmann, Leppy and Neb - Maintenance and QA
 // tmrj2222 - Provided code to sort the mice by groups.
+// Udhe - Creating The Origin of Dragons maps version from the original code of Draconic Depths maps design as the starting point
+// Alvite - Implemented coloration for Origin of Dragon maps new mice that doesn't included in original code
 // and anyone else we may have missed :peepolove:
 
 
@@ -33,7 +35,6 @@ const ARwarningText = "AR for Draconic Depths mice might be inaccurate.";
 
 // If the chest name contains any of the following as a substring, enable the colour coder.
 const chestKeywords = [
-    "Draconic Depths",
     "Origin of Dragons",
 ];
 
@@ -48,7 +49,7 @@ const RZero = [
     ["Flamina Cinderbreath","60.19%"],
     ["Crematio Scorchworth","25.91%"]
 ];
-const R100 = [  
+const R100 = [
     ["Incendarius the Unquenchable","29.72%"],
     ["Combustius Furnaceheart","28.19%"]
 ];
@@ -153,14 +154,14 @@ const miceGroups = [
     ["Elemental", EleZero, 173, "Std", 0, "#eb8be2"],
     ["Elemental", Ele100, 179, "EEC", 0, "#e565d8"],
     ["Elemental", Ele750, 273, "EEC", 0, "#de3ece"],
-    ["MoPi", MopiLow, 32, "DVC", 0, "#8f659a"],
-    ["MoPi", MopiMed, 60, "DVC", 0, "#a05ba4"],
-    ["MoPi", MopiHigh, 111, "DVC", 0, "#9c3dc2"],
-    ["MoPi", MopiMax, 142, "DVC", 0, "#8800ff"],
-    ["Eruption", SizzleMild, 32, "Mild", 0, "#c9b736"],
-    ["Eruption", BETrio, 60, "Medium", 0, "#e3a81c"],
-    ["Eruption", CinderBrut, 111, "Hot", 0, "#ffb800"],
-    ["Eruption", KSS, 142, "Flammin", 0, "#fc9d03"],
+    ["MoPi", MopiLow, 32, "DVC", 0, "#e1B2F7"],
+    ["MoPi", MopiMed, 60, "DVC", 0, "#c296e5"],
+    ["MoPi", MopiHigh, 111, "DVC", 0, "#b37cdf"],
+    ["MoPi", MopiMax, 142, "DVC", 0, "#9a85c4"],
+    ["Eruption", SizzleMild, 32, "Mild", 0, "#FFFF56"],
+    ["Eruption", BETrio, 60, "Medium", 0, "#FFDF56"],
+    ["Eruption", CinderBrut, 111, "Hot", 0, "#FFBA56"],
+    ["Eruption", KSS, 142, "Flammin", 0, "#FF8856"],
 
 ];
 
@@ -542,7 +543,7 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Type";
+            newSpan.innerHTML = "Area";
             masterDivHeader2.appendChild(newSpan);
         }
         {
@@ -577,28 +578,28 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Type";
+            newSpan.innerHTML = "QG Stage";
             masterDivHeader2.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header2Span");
             newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "SizzleMild";
+            newSpan.innerHTML = "SizzMild";
             masterDivHeader2.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header3Span");
             newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "BETrio";
+            newSpan.innerHTML = "BE Trio";
             masterDivHeader2.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header4Span");
             newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "CinderBrut";
+            newSpan.innerHTML = "CindBrut";
             masterDivHeader2.appendChild(newSpan);
         }
         {
