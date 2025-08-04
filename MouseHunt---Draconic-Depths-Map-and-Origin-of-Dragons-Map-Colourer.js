@@ -23,7 +23,7 @@
 // Kuhmann, Leppy and Neb - Maintenance and QA
 // tmrj2222 - Provided code to sort the mice by groups.
 // Udhe - Creating The Origin of Dragons maps version from the original code of Draconic Depths maps design as the starting point
-// Alvite - Implemented coloration for Origin of Dragon maps new mice that doesn't included in original code
+// Alvite - Implemented coloration on Origin of Dragon maps for the new mice that doesn't included in original code
 // and anyone else we may have missed :peepolove:
 
 
@@ -46,15 +46,15 @@ const ROutside = [
     ["Colonel Crisp","38.64%"]
 ];
 const RZero = [
-    ["Flamina Cinderbreath","60.19%"],
     ["Crematio Scorchworth","25.91%"]
 ];
 const R100 = [
-    ["Incendarius the Unquenchable","29.72%"],
-    ["Combustius Furnaceheart","28.19%"]
+    ["Flamina Cinderbreath","60.19%"]
 ];
 const R750 = [
-    ["Sulfurious the Raging Inferno","40.16%"]
+    ["Sulfurious the Raging Inferno","40.16%"],
+    ["Incendarius the Unquenchable","29.72%"],
+    ["Combustius Furnaceheart","28.19%"]
 ];
 const GOutside = [
     ["Goopus Dredgemore","16.67%"],
@@ -62,15 +62,15 @@ const GOutside = [
     ["Dreck Grimehaven","38.49%"]
 ]
 const GZero = [
-    ["Malignus Vilestrom","25.49%"],
-    ["Venomona Festerbloom","59.77%"]
+    ["Malignus Vilestrom","25.49%"]
 ];
 const G100 = [
-    ["Belchazar Banewright","33.75%"],
-    ["Pestilentia the Putrid","29.94%"]
+    ["Venomona Festerbloom","59.77%"]
 ];
 const G750 = [
-    ["Corrupticus the Blight Baron","39.27%"]
+    ["Corrupticus the Blight Baron","39.27%"],
+    ["Belchazar Banewright","33.75%"],
+    ["Pestilentia the Putrid","29.94%"]
 ];
 const BOutside = [
     ["Frostnip Icebound","14.18%"],
@@ -78,29 +78,29 @@ const BOutside = [
     ["Iciclesius the Defender","41.8%"]
 ]
 const BZero = [
-    ["Rimeus Polarblast","24.7%"],
-    ["Frigidocius Coldshot","60.79%"]
+    ["Rimeus Polarblast","24.7%"]
 ];
 const B100 = [
-    ["Avalancheus the Glacial","29.59%"],
-    ["Chillandria Permafrost","33.11%"],
+    ["Frigidocius Coldshot","60.79%"]
 ];
 const B750 = [
+    ["Avalancheus the Glacial","29.59%"],
+    ["Chillandria Permafrost","33.11%"],
     ["Arcticus the Biting Frost","39.12%"]
 ];
 const EleOutside = [
     ["Tranquilia Protecticus","100%"]
 ]
 const EleZero = [
-    ["Absolutia Harmonius","64.2%"],
-    ["Magnatius Majestica","56.52%"]
+    ["Absolutia Harmonius","64.2%"]
 ];
 const Ele100 = [
-    ["Supremia Magnificus","29.51%"],
-    ["Three'amat the Mother of Dragons","30.77%"]
+    ["Magnatius Majestica","56.52%"]
 ];
 const Ele750 = [
-    ["Mythical Dragon Emperor","39.72%"]
+    ["Mythical Dragon Emperor","39.72%"],
+    ["Supremia Magnificus","29.51%"],
+    ["Three'amat the Mother of Dragons","30.77%"]
 ];
 const MopiLow = [
     ["Violet Stormchild","43.17%"],
@@ -133,6 +133,30 @@ const KSS = [
     ["Kalor'ignis of the Geyser","100%"],
     ["Stormsurge the Vile Tempest","73.84%"]
 ];
+const Bland = [
+    ["Fuzzy Drake","93.92%"]
+];
+const Mild = [
+    ["Cork Defender","74.88%"],
+    ["Steam Sailor","100%"]
+];
+const Medium = [
+    ["Burly Bruiser","72.93%"],
+    ["Warming Wyvern","84.56%"]
+];
+const Hot = [
+    ["Horned Cork Hoarder","75.73%"],
+    ["Vaporior","83.77%"]
+];
+const Flammin = [
+    ["Rambunctious Rain Rumbler","76.04%"],
+    ["Corky, the Collector","6.90%"],
+    ["Pyrehyde","88.16%"]
+];
+const Wildfire = [
+    ["Corkataur","100%"],
+    ["Emberstone Scaled","100%"]
+];
 
 
 // group location, mice, minimum luck, bait, bait ID, color
@@ -162,6 +186,12 @@ const miceGroups = [
     ["Eruption", BETrio, 60, "Medium", 0, "#FFDF56"],
     ["Eruption", CinderBrut, 111, "Hot", 0, "#FFBA56"],
     ["Eruption", KSS, 142, "Flammin", 0, "#FF8856"],
+    ["Bland", MopiLow, 32, "Bland", 0, "#e1B2F7"],
+    ["Mild", MopiMed, 60, "Mild", 0, "#c296e5"],
+    ["Medium", MopiHigh, 111, "Medium", 0, "#b37cdf"],
+    ["Hot", MopiMax, 142, "Hot", 0, "#9a85c4"],
+    ["Flammin", MopiHigh, 111, "Flammin", 0, "#b37cdf"],
+    ["Wildfire", MopiMax, 142, "Wildfire", 0, "#9a85c4"],
 
 ];
 
@@ -466,35 +496,35 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Type";
+            newSpan.innerHTML = "Type/Area";
             masterDivHeader.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header2Span");
             newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "Outside";
+            newSpan.innerHTML = "Surface";
             masterDivHeader.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header3Span");
             newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "Zero";
+            newSpan.innerHTML = "<100/ 0-749";
             masterDivHeader.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header4Span");
             newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "100+";
+            newSpan.innerHTML = "<250/ 0-749";
             masterDivHeader.appendChild(newSpan);
         }
         {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header6Span");
             newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "750+";
+            newSpan.innerHTML = "750+ set";
             masterDivHeader.appendChild(newSpan);
         }
     }
@@ -543,7 +573,7 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Area";
+            newSpan.innerHTML = "Area/Stage";
             masterDivHeader2.appendChild(newSpan);
         }
         {
