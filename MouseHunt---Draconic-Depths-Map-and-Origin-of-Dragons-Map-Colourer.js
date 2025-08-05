@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         MouseHunt - Origin of Dragons Map Colourer
-// @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer & Udhe & Alvite
+// @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer & Udhe & Alvte
 // @namespace    https://greasyfork.org/en/users/967077-maidenless
-// @version      1.0.3
+// @version      1.0.0
 // @description  Color codes mice on Origin of Dragons maps according to type. Max ML shown per group and AR shown individually.
 // @match	    http://mousehuntgame.com/*
 // @match		https://mousehuntgame.com/*
@@ -13,8 +13,6 @@
 // @match		http://apps.facebook.com/mousehunt/*
 // @match		https://apps.facebook.com/mousehunt/*
 // @include      https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
-// @downloadURL https://update.greasyfork.org/scripts/509039/MouseHunt%20-%20Draconic%20Depths%20Map%20Colourer.user.js
-// @updateURL https://update.greasyfork.org/scripts/509039/MouseHunt%20-%20Draconic%20Depths%20Map%20Colourer.meta.js
 // ==/UserScript==
 // Credits:
 // tsitu - Provided the original code.
@@ -23,7 +21,7 @@
 // Kuhmann, Leppy and Neb - Maintenance and QA
 // tmrj2222 - Provided code to sort the mice by groups.
 // Udhe - Creating The Origin of Dragons maps version from the original code of Draconic Depths maps design as the starting point
-// Alvite - Implemented coloration on Origin of Dragon maps for the new mice that doesn't included in original code
+// Alvte - Implemented coloration on Origin of Dragon maps for the new mice that doesn't included in original code
 // and anyone else we may have missed :peepolove:
 
 
@@ -133,28 +131,38 @@ const KSS = [
     ["Kalor'ignis of the Geyser","100%"],
     ["Stormsurge the Vile Tempest","73.84%"]
 ];
-const Bland = [
+const CBland = [
     ["Fuzzy Drake","93.92%"]
 ];
-const Mild = [
-    ["Cork Defender","74.88%"],
+const CMild = [
+    ["Cork Defender","74.88%"]
+];
+const CMedium = [
+    ["Burly Bruiser","72.93%"]
+];
+const CHot = [
+    ["Horned Cork Hoarder","75.73%"]
+];
+const CFlammin = [
+    ["Rambunctious Rain Rumbler","76.04%"],
+    ["Corky, the Collector","6.90%"]
+];
+const CWildfire = [
+    ["Corkataur","100%"]
+];
+const PMild = [
     ["Steam Sailor","100%"]
 ];
-const Medium = [
-    ["Burly Bruiser","72.93%"],
+const PMedium = [
     ["Warming Wyvern","84.56%"]
 ];
-const Hot = [
-    ["Horned Cork Hoarder","75.73%"],
+const PHot = [
     ["Vaporior","83.77%"]
 ];
-const Flammin = [
-    ["Rambunctious Rain Rumbler","76.04%"],
-    ["Corky, the Collector","6.90%"],
+const PFlammin = [
     ["Pyrehyde","88.16%"]
 ];
-const Wildfire = [
-    ["Corkataur","100%"],
+const PWildfire = [
     ["Emberstone Scaled","100%"]
 ];
 
@@ -186,13 +194,17 @@ const miceGroups = [
     ["Eruption", BETrio, 60, "Medium", 0, "#FFDF56"],
     ["Eruption", CinderBrut, 111, "Hot", 0, "#FFBA56"],
     ["Eruption", KSS, 142, "Flammin", 0, "#FF8856"],
-    ["Bland", MopiLow, 32, "Bland", 0, "#e1B2F7"],
-    ["Mild", MopiMed, 60, "Mild", 0, "#c296e5"],
-    ["Medium", MopiHigh, 111, "Medium", 0, "#b37cdf"],
-    ["Hot", MopiMax, 142, "Hot", 0, "#9a85c4"],
-    ["Flammin", MopiHigh, 111, "Flammin", 0, "#b37cdf"],
-    ["Wildfire", MopiMax, 142, "Wildfire", 0, "#9a85c4"],
-
+    ["Queso", CBland, 32, "Bland", 0, "#a8ff00"],
+    ["Queso", CMild, 60, "Mild", 0, "#daff00"],
+    ["Queso", CMedium, 111, "Medium", 0, "#eacd00"],
+    ["Queso", CHot, 142, "Hot", 0, "#ffc200"],
+    ["Queso", CFlammin, 111, "Flammin", 0, "#ff8800"],
+    ["Queso", CWildfire, 142, "Wildfire", 0, "#cf5700"],
+    ["Queso", PMild, 60, "Mild", 0, "#daff00"],
+    ["Queso", PMedium, 111, "Medium", 0, "#eacd00"],
+    ["Queso", PHot, 142, "Hot", 0, "#ffc200"],
+    ["Queso", PFlammin, 111, "Flammin", 0, "#ff8800"],
+    ["Queso", PWildfire, 142, "Wildfire", 0, "#cf5700"]
 ];
 
 class Mouse {
