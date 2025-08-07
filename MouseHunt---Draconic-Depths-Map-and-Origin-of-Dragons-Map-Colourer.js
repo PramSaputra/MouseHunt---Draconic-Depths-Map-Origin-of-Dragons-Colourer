@@ -145,7 +145,7 @@ const CHot = [
 ];
 const CFlammin = [
     ["Rambunctious Rain Rumbler","76.04%"],
-    ["Corky, the Collector","6.90%"]
+    ["Corky the Collector","6.90%"]
 ];
 const CWildfire = [
     ["Corkataur","100%"]
@@ -164,6 +164,16 @@ const PFlammin = [
 ];
 const PWildfire = [
     ["Emberstone Scaled","100%"]
+];
+const PnF = [
+    ["Tiny Dragonfly","51.76%"],
+    ["Lancer Guard","30.13%"],
+    ["Dragonbreather","16.39%"],
+    ["Regal Spearman","34.37%"],
+    ["Paragon of Dragons","100%"]
+];
+const SP = [
+    ["Empyrean Javelineer","20.30%"]
 ];
 
 
@@ -194,17 +204,19 @@ const miceGroups = [
     ["Eruption", BETrio, 60, "Medium", 0, "#FFDF56"],
     ["Eruption", CinderBrut, 111, "Hot", 0, "#FFBA56"],
     ["Eruption", KSS, 142, "Flammin", 0, "#FF8856"],
-    ["Queso", CBland, 32, "Bland", 0, "#a8ff00"],
-    ["Queso", CMild, 60, "Mild", 0, "#daff00"],
-    ["Queso", CMedium, 111, "Medium", 0, "#eacd00"],
-    ["Queso", CHot, 142, "Hot", 0, "#ffc200"],
-    ["Queso", CFlammin, 111, "Flammin", 0, "#ff8800"],
-    ["Queso", CWildfire, 142, "Wildfire", 0, "#cf5700"],
-    ["Queso", PMild, 60, "Mild", 0, "#daff00"],
-    ["Queso", PMedium, 111, "Medium", 0, "#eacd00"],
-    ["Queso", PHot, 142, "Hot", 0, "#ffc200"],
-    ["Queso", PFlammin, 111, "Flammin", 0, "#ff8800"],
-    ["Queso", PWildfire, 142, "Wildfire", 0, "#cf5700"]
+    ["Cork", CMild, 60, "Mild", 0, "#daff00"],
+    ["Cork", CMedium, 111, "Medium", 0, "#eacd00"],
+    ["Cork", CHot, 142, "Hot", 0, "#ECB400"],
+    ["Cork", CFlammin, 111, "Flammin", 0, "#ff8800"],
+    ["Cork", CWildfire, 142, "Wildfire", 0, "#cf5700"],
+    ["Cork", CBland, 32, "Bland", 0, "#a8ff00"],
+    ["PnF", PnF, 60, "Mild", 0, "#cc3339"],
+    ["Pressure", PMild, 60, "Mild", 0, "#daff00"],
+    ["Pressure", PMedium, 111, "Medium", 0, "#eacd00"],
+    ["Pressure", PHot, 142, "Hot", 0, "#ECB400"],
+    ["Pressure", PFlammin, 111, "Flammin", 0, "#ff8800"],
+    ["Pressure", PWildfire, 142, "Wildfire", 0, "#cf5700"],
+    ["SP", SP, 142, "Wildfire", 0, "#d87827"]
 ];
 
 class Mouse {
@@ -400,6 +412,10 @@ function colorize() {
     masterDivHeader2.className = "tsitu-map-div";
     masterDivHeader2.style =
         "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
+    const masterDivHeader3 = document.createElement("div");
+    masterDivHeader3.className = "tsitu-map-div";
+    masterDivHeader3.style =
+        "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
     const masterDivRow1 = document.createElement("div");
     masterDivRow1.className = "tsitu-map-div";
     masterDivRow1.style =
@@ -412,12 +428,14 @@ function colorize() {
     masterDivRow3.className = "tsitu-map-div";
     masterDivRow3.style =
         "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden"
-
     const masterDivRow4 = document.createElement("div");
     masterDivRow4.className = "tsitu-map-div";
     masterDivRow4.style =
         "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
-
+    const masterDivRow5 = document.createElement("div");
+    masterDivRow5.className = "tsitu-map-div";
+    masterDivRow5.style =
+        "display: inline-flex; margin-bottom: 0px; width: 100%; text-align: center; line-height: 1.25; overflow: hidden";
     const spanStyle =
           "; width: auto; padding: 5px; width: 45px; color: black; font-weight: bold; font-size: 12.75px; text-shadow: 0px 0px 11px white";
 
@@ -425,6 +443,7 @@ function colorize() {
     const spans2 = [];
     const spans3 = [];
     const spans4 = [];
+    const spans5 = [];
 
     for (let i = 0; i < allMiceGroups.length; i++) {
         const newSpan = document.createElement("span");
@@ -449,8 +468,10 @@ function colorize() {
             spans2.push(newSpan);
        } else if (i < 24) {
             spans3.push(newSpan);
-       } else {
+       } else if (i < 31) {
             spans4.push(newSpan);
+       } else {
+            spans5.push(newSpan);
        }
     }
 
@@ -496,7 +517,7 @@ function colorize() {
 
     // Assemble masterDiv
      const headerSpanLoactionStyle =
-          "; width: auto; padding: 5px; color: black; width: 60px; font-size: 9px; text-shadow: 0px 0px 11px white";
+          "; width: auto; padding: 5px; color: black; width: 45px; font-size: 9px; text-shadow: 0px 0px 11px white";
      const headerSpanGroupStyle =
           "; width: auto; padding: 5px; color: black; width: 45px; font-size: 9px; text-shadow: 0px 0px 11px white";
 
@@ -508,7 +529,7 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Type/Area";
+            newSpan.innerHTML = "Type/ Area";
             masterDivHeader.appendChild(newSpan);
         }
         {
@@ -534,7 +555,7 @@ function colorize() {
         }
         {
             const newSpan = document.createElement("span");
-            newSpan.classList.add("Header6Span");
+            newSpan.classList.add("Header5Span");
             newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
             newSpan.innerHTML = "750+ set";
             masterDivHeader.appendChild(newSpan);
@@ -574,7 +595,7 @@ function colorize() {
         const newSpan = document.createElement("span");
         newSpan.classList.add("ElementalSpan");
         newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-        newSpan.innerHTML = "Elemental";
+        newSpan.innerHTML = "EEC";
         masterDivRow2.appendChild(newSpan);
     }
     for (let i = 4; i < 8; i++) {
@@ -585,7 +606,7 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header1Span");
             newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
-            newSpan.innerHTML = "Area/Stage";
+            newSpan.innerHTML = "Area/ Stage";
             masterDivHeader2.appendChild(newSpan);
         }
         {
@@ -654,7 +675,7 @@ function colorize() {
     }
     {
         const newSpan = document.createElement("span");
-        newSpan.classList.add("FireSpan");
+        newSpan.classList.add("MoPiSpan");
         newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
         newSpan.innerHTML = "MoPi";
         masterDivRow3.appendChild(newSpan);
@@ -664,13 +685,152 @@ function colorize() {
     }
     {
         const newSpan = document.createElement("span");
-        newSpan.classList.add("PoisonSpan");
+        newSpan.classList.add("EruptionSpan");
         newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
         newSpan.innerHTML = "Eruption";
         masterDivRow3.appendChild(newSpan);
     }
     for (let i = 4; i < 8; i++) {
         masterDivRow3.appendChild(spans3[i]);
+    }
+    for (let i = 0; i < 1; i++) {
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header1Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+            newSpan.innerHTML = "Bait/ Stage";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header2Span");
+            newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Mild";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header3Span");
+            newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Med";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header4Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Hot";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header5Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+            newSpan.innerHTML = "Flammin";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header6Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header7Span");
+            newSpan.style = "background-color: " + aacColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "WildFire";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header8Span");
+            newSpan.style = "background-color: " + mmcColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Bland";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header5Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "Stage/ Area";
+            masterDivHeader3.appendChild(newSpan);
+        }
+        {
+            const newSpan = document.createElement("span");
+            newSpan.classList.add("Header6Span");
+            newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
+            newSpan.innerHTML = "FI";
+            masterDivHeader3.appendChild(newSpan);
+        }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("CorkSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "Cork1";
+        masterDivRow4.appendChild(newSpan);
+    }
+    for (let i = 0; i < 4; i++) {
+        masterDivRow4.appendChild(spans4[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("CorkSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "Cork2";
+        masterDivRow4.appendChild(newSpan);
+    }
+    for (let i = 4; i < 6; i++) {
+        masterDivRow4.appendChild(spans4[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("CorkSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "PnF";
+        masterDivRow4.appendChild(newSpan);
+    }
+    for (let i = 6; i < 7; i++) {
+        masterDivRow4.appendChild(spans4[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("PressureSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "Pressure 1";
+        masterDivRow5.appendChild(newSpan);
+    }
+    for (let i = 0; i < 4; i++) {
+        masterDivRow5.appendChild(spans5[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("PressureSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "Pressure 2";
+        masterDivRow5.appendChild(newSpan);
+    }
+    for (let i = 4; i < 5; i++) {
+        masterDivRow5.appendChild(spans5[i]);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("PressureSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "";
+        masterDivRow5.appendChild(newSpan);
+    }
+    {
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("PressureSpan");
+        newSpan.style = "background-color: " + greyColor + headerSpanLoactionStyle;
+        newSpan.innerHTML = "SP";
+        masterDivRow5.appendChild(newSpan);
+    }
+    for (let i = 5; i < 6; i++) {
+        masterDivRow5.appendChild(spans5[i]);
+    }
     }
 
     // Inject into DOM
@@ -685,6 +845,9 @@ function colorize() {
     ) {
         insertEl.insertAdjacentElement("afterbegin", highlightDiv);
         insertEl.insertAdjacentElement("afterbegin", ARDiv);
+        insertEl.insertAdjacentElement("afterbegin", masterDivRow5);
+        insertEl.insertAdjacentElement("afterbegin", masterDivRow4);
+        insertEl.insertAdjacentElement("afterbegin", masterDivHeader3);
         insertEl.insertAdjacentElement("afterbegin", masterDivRow3);
         insertEl.insertAdjacentElement("afterbegin", masterDivHeader2);
         insertEl.insertAdjacentElement("afterbegin", masterDivRow2);
