@@ -1,7 +1,6 @@
 // ==UserScript==
 // @name         MouseHunt - Origin of Dragons Map Colourer
 // @author       tsitu & Leppy & Neb & kuh & in59te & Warden Slayer & Udhe & Alvte
-// @namespace    https://greasyfork.org/en/users/967077-maidenless
 // @version      1.0.0
 // @description  Color codes mice on Origin of Dragons maps according to type. Max ML shown per group and AR shown individually.
 // @match	    http://mousehuntgame.com/*
@@ -204,19 +203,19 @@ const miceGroups = [
     ["Eruption", BETrio, 60, "Medium", 0, "#FFDF56"],
     ["Eruption", CinderBrut, 111, "Hot", 0, "#FFBA56"],
     ["Eruption", KSS, 142, "Flammin", 0, "#FF8856"],
-    ["Cork", CMild, 60, "Mild", 0, "#daff00"],
-    ["Cork", CMedium, 111, "Medium", 0, "#eacd00"],
-    ["Cork", CHot, 142, "Hot", 0, "#ECB400"],
-    ["Cork", CFlammin, 111, "Flammin", 0, "#ff8800"],
-    ["Cork", CWildfire, 142, "Wildfire", 0, "#cf5700"],
+    ["Cork", CMild, 60, "Mild", 0, "#E9EA53"],
+    ["Cork", CMedium, 111, "Medium", 0, "#EFC922"],
+    ["Cork", CHot, 142, "Hot", 0, "#EE970C"],
+    ["Cork", CFlammin, 111, "Flammin", 0, "#FF842E"],
+    ["Cork", CWildfire, 142, "Wildfire", 0, "#E41122"],
     ["Cork", CBland, 32, "Bland", 0, "#a8ff00"],
-    ["PnF", PnF, 60, "Mild", 0, "#cc3339"],
-    ["Pressure", PMild, 60, "Mild", 0, "#daff00"],
-    ["Pressure", PMedium, 111, "Medium", 0, "#eacd00"],
-    ["Pressure", PHot, 142, "Hot", 0, "#ECB400"],
-    ["Pressure", PFlammin, 111, "Flammin", 0, "#ff8800"],
-    ["Pressure", PWildfire, 142, "Wildfire", 0, "#cf5700"],
-    ["SP", SP, 142, "Wildfire", 0, "#d87827"]
+    ["PnF", PnF, 60, "Mild", 0, "#aa5755"],
+    ["Pressure", PMild, 60, "Mild", 0, "#E9EA53"],
+    ["Pressure", PMedium, 111, "Medium", 0, "#EFC922"],
+    ["Pressure", PHot, 142, "Hot", 0, "#EE970C"],
+    ["Pressure", PFlammin, 111, "Flammin", 0, "#FF842E"],
+    ["Pressure", PWildfire, 142, "Wildfire", 0, "#E41122"],
+    ["SP", SP, 142, "Wildfire", 0, "#b17a4e"]
 ];
 
 class Mouse {
@@ -733,7 +732,7 @@ function colorize() {
             const newSpan = document.createElement("span");
             newSpan.classList.add("Header6Span");
             newSpan.style = "background-color: " + greyColor + headerSpanGroupStyle;
-            newSpan.innerHTML = "";
+            newSpan.innerHTML = "Bait/ Stage";
             masterDivHeader3.appendChild(newSpan);
         }
         {
